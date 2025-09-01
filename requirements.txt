@@ -1,0 +1,23 @@
+# Core Dependencies
+opencv-python>=4.8.0
+numpy>=1.24.0
+PyYAML>=6.0
+psutil>=5.9.0
+
+# MQTT and Home Assistant Integration
+paho-mqtt>=1.6.1
+
+# Hailo AI Dependencies (will be installed separately on Raspberry Pi)
+# hailo-platform  # This will be installed via Hailo's package manager
+
+# Optional dependencies for enhanced functionality
+# Pillow>=9.5.0  # For additional image processing if needed
+
+# Development and Testing (uncomment for development)
+# pytest>=7.4.0
+# pytest-cov>=4.1.0
+# black>=23.7.0
+# flake8>=6.0.0
+
+# System monitoring
+# python-systemd>=234  # For systemd integration if needed

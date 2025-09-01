@@ -1,0 +1,85 @@
+# VisionAI4SchoolBus Configuration Template
+# Copy this file to config.yaml and customize for your setup
+
+# Camera Configuration
+camera:
+  device_id: 0                    # USB camera device ID (0 for first camera)
+  resolution:
+    width: 1280                   # Camera resolution width
+    height: 720                   # Camera resolution height
+  fps: 30                         # Target frames per second
+  auto_exposure: true             # Use automatic exposure
+  exposure_value: 100             # Manual exposure value (if auto_exposure is false)
+  gain: 1.0                       # Camera gain
+  buffer_size: 1                  # Frame buffer size for low latency
+
+# AI Detection Configuration  
+detection:
+  model_path: "models/yolov8n_hailo.hef"     # Path to Hailo model file
+  min_confidence: 0.7             # Minimum confidence threshold for detections
+  min_bus_size: 0.05              # Minimum bus size as fraction of image (0.05 = 5%)
+  cooldown_seconds: 30            # Cooldown between detections (prevents spam)
+  nms_threshold: 0.45             # Non-maximum suppression threshold
+  input_resolution:
+    width: 640                    # Model input width
+    height: 640                   # Model input height
+  hailo_device_id: 0              # Hailo device ID
+  batch_size: 1                   # Batch size for inference
+
+# Home Automation Configuration
+automation:
+  activation_duration_seconds: 300  # How long devices stay active (5 minutes)
+  voice_announcements: true         # Enable voice announcements
+  announcement_message: "School bus detected in front of the house"
+
+# MQTT Broker Configuration
+mqtt:
+  broker_host: "localhost"        # MQTT broker hostname/IP
+  broker_port: 1883               # MQTT broker port
+  username: ""                    # MQTT username (optional)
+  password: ""                    # MQTT password (optional)
+  client_id: "visionai4schoolbus" # MQTT client ID
+  topic_prefix: "schoolbus"       # Topic prefix for all messages
+  qos: 1                          # Quality of Service level
+  retain: true                    # Retain messages
+  keepalive: 60                   # Connection keepalive in seconds
+
+# Home Assistant Integration
+home_assistant:
+  discovery_prefix: "homeassistant"  # HA MQTT discovery prefix
+  device_name: "School Bus Detector" # Device name in Home Assistant
+  devices:
+    lights:                       # List of light entities to control
+      - "light.front_porch"
+      - "light.living_room"
+    switches:                     # List of switch entities to control  
+      - "switch.outdoor_speakers"
+      - "switch.security_system"
+
+# Logging Configuration
+logging:
+  level: "INFO"                   # Log level: DEBUG, INFO, WARNING, ERROR
+  file_path: "logs/visionai4schoolbus.log"  # Log file path
+  max_file_size: 10485760         # Max log file size in bytes (10MB)
+  backup_count: 5                 # Number of backup log files
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  console_output: true            # Also output logs to console
+
+# Performance Monitoring
+monitoring:
+  enabled: true                   # Enable performance monitoring
+  metrics_file: "logs/metrics.json"  # Metrics output file
+  performance_log_interval: 60    # How often to log performance stats (seconds)
+  save_detection_images: true     # Save images with detections for review
+  detection_images_path: "logs/detections"  # Path to save detection images
+  max_inference_time: 0.1         # Alert if inference takes longer than 100ms
+  min_fps: 10.0                   # Alert if FPS drops below this value
+  max_cpu_usage: 80.0             # Alert if CPU usage exceeds this percentage
+  max_memory_usage: 80.0          # Alert if memory usage exceeds this percentage
+
+# Testing and Calibration
+testing:
+  enabled: false                  # Enable testing mode
+  test_images_path: "test_images" # Path to test images
+  output_path: "test_output"      # Path for test outputs
+  save_test_results: true         # Save test detection results

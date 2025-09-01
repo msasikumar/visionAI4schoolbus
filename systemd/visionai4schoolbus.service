@@ -1,0 +1,57 @@
+[Unit]
+Description=VisionAI4SchoolBus - School Bus Detection System
+Documentation=https://github.com/msasikumar/visionAI4schoolbus
+After=network.target network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=visionai
+Group=visionai
+WorkingDirectory=/opt/visionai4schoolbus
+Environment=PATH=/opt/visionai4schoolbus/venv/bin
+Environment=PYTHONPATH=/opt/visionai4schoolbus/src
+ExecStart=/opt/visionai4schoolbus/venv/bin/python main.py
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=10
+TimeoutStartSec=60
+TimeoutStopSec=30
+
+# Output to systemd journal
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=visionai4schoolbus
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=false
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/visionai4schoolbus/logs /opt/visionai4schoolbus/config
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RemoveIPC=true
+PrivateMounts=true
+LockPersonality=true
+RestrictNamespaces=true
+SystemCallArchitectures=native
+
+# Resource limits
+MemoryAccounting=true
+MemoryMax=2G
+CPUAccounting=true
+CPUQuota=200%
+TasksMax=100
+
+# Device access for camera and Hailo
+SupplementaryGroups=video dialout
+
+[Install]
+WantedBy=multi-user.target
