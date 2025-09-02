@@ -81,13 +81,36 @@ visionAI4schoolbus/
 
 ## Documentation
 
-- [Hardware Setup](docs/hardware_setup.md)
-- [Software Installation](docs/installation.md)
-- [Configuration Guide](docs/configuration.md)
-- [Home Assistant Integration](docs/home_assistant.md)
-- [API Reference](docs/api.md)
-- [Troubleshooting](docs/troubleshooting.md)
+### Setup and Installation
+- [Hardware Setup Guide](docs/hardware-setup.md) - Complete hardware assembly and configuration
+- [Installation Guide](docs/installation-guide.md) - Step-by-step software installation
+- [Configuration Guide](docs/configuration.md) - Comprehensive configuration reference
+
+### Operation and Maintenance
+- [Troubleshooting Guide](docs/troubleshooting.md) - Common issues and solutions
+- [API Reference](docs/api-reference.md) - Complete API documentation
+- [Performance Monitoring](docs/configuration.md#performance-monitoring) - System monitoring and optimization
+
+### Development and Community
+- [Contributing Guide](docs/contributing.md) - How to contribute to the project
+- [Changelog](docs/changelog.md) - Version history and release notes
+- [License Information](docs/license.md) - Licensing details and compliance
+
+## Community
+
+### Getting Help
+- **Documentation**: Start with the guides above
+- **Issues**: [Report bugs or request features](https://github.com/msasikumar/visionAI4schoolbus/issues)
+- **Discussions**: [Ask questions and share ideas](https://github.com/msasikumar/visionAI4schoolbus/discussions)
+
+### Contributing
+We welcome contributions! Please read our [Contributing Guide](docs/contributing.md) for details on:
+- Code contributions and pull requests
+- Bug reports and feature requests
+- Documentation improvements
+- Community participation
 
 ## License
 
-MIT License - see LICENSE file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+For comprehensive license information including third-party dependencies, see [License Documentation](docs/license.md).
