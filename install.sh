@@ -159,6 +159,28 @@ install_application() {
     print_status "Installing Python dependencies..."
     sudo -u "$SERVICE_USER" ./venv/bin/pip install -r requirements.txt
     
+    # Download Halio object detection model
+    print_status "Downloading Halio object detection model..."
+    mkdir -p "$INSTALL_DIR/models"
+    chown "$SERVICE_USER:$SERVICE_USER" "$INSTALL_DIR/models"
+    
+    # Download the Halio model (using YOLOv8n as placeholder - replace with actual Halio model URL)
+    if [[ ! -f "$INSTALL_DIR/models/halio_model.hef" ]]; then
+        sudo -u "$SERVICE_USER" wget -O "$INSTALL_DIR/models/halio_model.hef" "https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt" || {
+            print_warning "Failed to download Halio model automatically"
+            print_status "Please download the Halio model manually:"
+            print_status "1. Visit the Hailo Model Zoo or your model source"
+            print_status "2. Download the .hef model file"
+            print_status "3. Place it in $INSTALL_DIR/models/halio_model.hef"
+        }
+        
+        if [[ -f "$INSTALL_DIR/models/halio_model.hef" ]]; then
+            print_success "Halio object detection model downloaded successfully"
+        fi
+    else
+        print_success "Halio model already exists"
+    fi
+    
     # Create configuration from template
     if [[ ! -f "$INSTALL_DIR/config/config.yaml" ]]; then
         sudo -u "$SERVICE_USER" cp "$INSTALL_DIR/config/config.template.yaml" "$INSTALL_DIR/config/config.yaml"
